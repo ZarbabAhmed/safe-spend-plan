@@ -96,6 +96,19 @@ export interface AppState {
   transactions: Transaction[];
   goals: Goal[];
   emergency: EmergencyFund;
-  /** money moved into general savings, by month */
-  savingsDeposits: { id: string; month: string; amount: number; date: string }[];
+  /** money moved into savings, the emergency fund, or a goal */
+  savingsDeposits: SavingsDeposit[];
+}
+
+export type DepositTarget = "savings" | "emergency" | "goal";
+
+export interface SavingsDeposit {
+  id: string;
+  /** yyyy-MM */
+  month: string;
+  amount: number;
+  date: string;
+  target: DepositTarget;
+  goalId?: string;
+  note?: string;
 }
