@@ -15,13 +15,13 @@ export interface Category {
   /** lucide icon key, resolved in the UI layer */
   icon: string;
   /** whether the user can delete it */
-  custom?: boolean;
+  custom?: boolean | undefined;
 }
 
 export interface Profile {
   name: string;
-  email?: string;
-  phone?: string;
+  email?: string | undefined;
+  phone?: string | undefined;
   userType: UserType;
   currency: string;
   pinLength: 4 | 6;
@@ -53,17 +53,17 @@ export interface Transaction {
   amount: number;
   /** expense: category id. income: income kind. */
   categoryId: string;
-  incomeKind?: IncomeKind;
+  incomeKind?: IncomeKind | undefined;
   /** ISO date (yyyy-MM-dd) */
   date: string;
-  method?: PaymentMethod;
-  note?: string;
+  method?: PaymentMethod | undefined;
+  note?: string | undefined;
   createdAt: string;
 }
 
 export interface Milestone {
   amount: number;
-  label?: string;
+  label?: string | undefined;
 }
 
 export interface Goal {
@@ -73,7 +73,7 @@ export interface Goal {
   target: number;
   saved: number;
   monthlyContribution: number;
-  targetDate?: string;
+  targetDate?: string | undefined;
   createdAt: string;
   milestones: Milestone[];
 }
@@ -109,6 +109,6 @@ export interface SavingsDeposit {
   amount: number;
   date: string;
   target: DepositTarget;
-  goalId?: string;
-  note?: string;
+  goalId?: string | undefined;
+  note?: string | undefined;
 }
