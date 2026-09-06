@@ -15,6 +15,8 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppBudgetRouteImport } from './routes/app.budget'
+import { Route as AppTransactionsRouteImport } from './routes/app.transactions'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +48,16 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppBudgetRoute = AppBudgetRouteImport.update({
+  id: '/budget',
+  path: '/budget',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTransactionsRoute = AppTransactionsRouteImport.update({
+  id: '/transactions',
+  path: '/transactions',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,6 +65,8 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/onboarding': typeof OnboardingRoute
   '/terms': typeof TermsRoute
+  '/app/budget': typeof AppBudgetRoute
+  '/app/transactions': typeof AppTransactionsRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
@@ -60,6 +74,8 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/onboarding': typeof OnboardingRoute
   '/terms': typeof TermsRoute
+  '/app/budget': typeof AppBudgetRoute
+  '/app/transactions': typeof AppTransactionsRoute
   '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
@@ -69,14 +85,40 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/onboarding': typeof OnboardingRoute
   '/terms': typeof TermsRoute
+  '/app/budget': typeof AppBudgetRoute
+  '/app/transactions': typeof AppTransactionsRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/auth' | '/onboarding' | '/terms' | '/app/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/onboarding'
+    | '/terms'
+    | '/app/budget'
+    | '/app/transactions'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/onboarding' | '/terms' | '/app'
-  id: '__root__' | '/' | '/app' | '/auth' | '/onboarding' | '/terms' | '/app/'
+  to:
+    | '/'
+    | '/auth'
+    | '/onboarding'
+    | '/terms'
+    | '/app/budget'
+    | '/app/transactions'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/onboarding'
+    | '/terms'
+    | '/app/budget'
+    | '/app/transactions'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -131,14 +173,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/budget': {
+      id: '/app/budget'
+      path: '/budget'
+      fullPath: '/app/budget'
+      preLoaderRoute: typeof AppBudgetRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/transactions': {
+      id: '/app/transactions'
+      path: '/transactions'
+      fullPath: '/app/transactions'
+      preLoaderRoute: typeof AppTransactionsRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppBudgetRoute: typeof AppBudgetRoute
+  AppTransactionsRoute: typeof AppTransactionsRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppBudgetRoute: AppBudgetRoute,
+  AppTransactionsRoute: AppTransactionsRoute,
   AppIndexRoute: AppIndexRoute,
 }
 
