@@ -19,6 +19,7 @@ import { Route as AppBudgetRouteImport } from './routes/app.budget'
 import { Route as AppSavingsRouteImport } from './routes/app.savings'
 import { Route as AppTransactionsRouteImport } from './routes/app.transactions'
 import { Route as AppGoalsIndexRouteImport } from './routes/app.goals.index'
+import { Route as AppGoalsGoalIdRouteImport } from './routes/app.goals.$goalId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -70,6 +71,11 @@ const AppGoalsIndexRoute = AppGoalsIndexRouteImport.update({
   path: '/goals/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppGoalsGoalIdRoute = AppGoalsGoalIdRouteImport.update({
+  id: '/goals/$goalId',
+  path: '/goals/$goalId',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/app/savings': typeof AppSavingsRoute
   '/app/transactions': typeof AppTransactionsRoute
   '/app/': typeof AppIndexRoute
+  '/app/goals/$goalId': typeof AppGoalsGoalIdRoute
   '/app/goals/': typeof AppGoalsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -92,6 +99,7 @@ export interface FileRoutesByTo {
   '/app/savings': typeof AppSavingsRoute
   '/app/transactions': typeof AppTransactionsRoute
   '/app': typeof AppIndexRoute
+  '/app/goals/$goalId': typeof AppGoalsGoalIdRoute
   '/app/goals': typeof AppGoalsIndexRoute
 }
 export interface FileRoutesById {
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/app/savings': typeof AppSavingsRoute
   '/app/transactions': typeof AppTransactionsRoute
   '/app/': typeof AppIndexRoute
+  '/app/goals/$goalId': typeof AppGoalsGoalIdRoute
   '/app/goals/': typeof AppGoalsIndexRoute
 }
 export interface FileRouteTypes {
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
     | '/app/savings'
     | '/app/transactions'
     | '/app/'
+    | '/app/goals/$goalId'
     | '/app/goals/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/app/savings'
     | '/app/transactions'
     | '/app'
+    | '/app/goals/$goalId'
     | '/app/goals'
   id:
     | '__root__'
@@ -142,6 +153,7 @@ export interface FileRouteTypes {
     | '/app/savings'
     | '/app/transactions'
     | '/app/'
+    | '/app/goals/$goalId'
     | '/app/goals/'
   fileRoutesById: FileRoutesById
 }
@@ -225,6 +237,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppGoalsIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/goals/$goalId': {
+      id: '/app/goals/$goalId'
+      path: '/goals/$goalId'
+      fullPath: '/app/goals/$goalId'
+      preLoaderRoute: typeof AppGoalsGoalIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -233,6 +252,7 @@ interface AppRouteChildren {
   AppSavingsRoute: typeof AppSavingsRoute
   AppTransactionsRoute: typeof AppTransactionsRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppGoalsGoalIdRoute: typeof AppGoalsGoalIdRoute
   AppGoalsIndexRoute: typeof AppGoalsIndexRoute
 }
 
@@ -241,6 +261,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppSavingsRoute: AppSavingsRoute,
   AppTransactionsRoute: AppTransactionsRoute,
   AppIndexRoute: AppIndexRoute,
+  AppGoalsGoalIdRoute: AppGoalsGoalIdRoute,
   AppGoalsIndexRoute: AppGoalsIndexRoute,
 }
 
