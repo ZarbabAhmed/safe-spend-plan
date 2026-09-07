@@ -16,6 +16,7 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppBudgetRouteImport } from './routes/app.budget'
+import { Route as AppSavingsRouteImport } from './routes/app.savings'
 import { Route as AppTransactionsRouteImport } from './routes/app.transactions'
 
 const IndexRoute = IndexRouteImport.update({
@@ -53,6 +54,11 @@ const AppBudgetRoute = AppBudgetRouteImport.update({
   path: '/budget',
   getParentRoute: () => AppRoute,
 } as any)
+const AppSavingsRoute = AppSavingsRouteImport.update({
+  id: '/savings',
+  path: '/savings',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppTransactionsRoute = AppTransactionsRouteImport.update({
   id: '/transactions',
   path: '/transactions',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/terms': typeof TermsRoute
   '/app/budget': typeof AppBudgetRoute
+  '/app/savings': typeof AppSavingsRoute
   '/app/transactions': typeof AppTransactionsRoute
   '/app/': typeof AppIndexRoute
 }
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/terms': typeof TermsRoute
   '/app/budget': typeof AppBudgetRoute
+  '/app/savings': typeof AppSavingsRoute
   '/app/transactions': typeof AppTransactionsRoute
   '/app': typeof AppIndexRoute
 }
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/terms': typeof TermsRoute
   '/app/budget': typeof AppBudgetRoute
+  '/app/savings': typeof AppSavingsRoute
   '/app/transactions': typeof AppTransactionsRoute
   '/app/': typeof AppIndexRoute
 }
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/terms'
     | '/app/budget'
+    | '/app/savings'
     | '/app/transactions'
     | '/app/'
   fileRoutesByTo: FileRoutesByTo
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/terms'
     | '/app/budget'
+    | '/app/savings'
     | '/app/transactions'
     | '/app'
   id:
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/terms'
     | '/app/budget'
+    | '/app/savings'
     | '/app/transactions'
     | '/app/'
   fileRoutesById: FileRoutesById
@@ -180,6 +192,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppBudgetRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/savings': {
+      id: '/app/savings'
+      path: '/savings'
+      fullPath: '/app/savings'
+      preLoaderRoute: typeof AppSavingsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/transactions': {
       id: '/app/transactions'
       path: '/transactions'
@@ -192,12 +211,14 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppBudgetRoute: typeof AppBudgetRoute
+  AppSavingsRoute: typeof AppSavingsRoute
   AppTransactionsRoute: typeof AppTransactionsRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppBudgetRoute: AppBudgetRoute,
+  AppSavingsRoute: AppSavingsRoute,
   AppTransactionsRoute: AppTransactionsRoute,
   AppIndexRoute: AppIndexRoute,
 }
